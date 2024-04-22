@@ -18,6 +18,7 @@ namespace FrmMain
         public tclass_schedule()
         {
             this.tclass_reserve = new HashSet<tclass_reserve>();
+            this.tcourse_photo = new HashSet<tcourse_photo>();
         }
     
         public int class_schedule_id { get; set; }
@@ -38,5 +39,7 @@ namespace FrmMain
         public virtual tfield tfield { get; set; }
         public virtual tIdentity tIdentity { get; set; }
         public virtual ttimes_detail ttimes_detail { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tcourse_photo> tcourse_photo { get; set; }
     }
 }

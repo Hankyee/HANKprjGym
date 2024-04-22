@@ -14,16 +14,16 @@ namespace FrmMain.tool
     public partial class CPictureBox : UserControl
     {
         public event DPicture showPicture;
-        private tcoach_photo _CoachPhoto;
+        private tcourse_photo _CouursePhoto;
 
         public Image Image{get { return pictureBox1.Image; }}
 
-        public tcoach_photo CoachPhoto { get { return _CoachPhoto; } set {
-                _CoachPhoto = value;
-                if (!string.IsNullOrEmpty(_CoachPhoto.coach_photo))
+        public tcourse_photo CoursePhoto{ get { return _CouursePhoto; } set {
+                _CouursePhoto = value;
+                if (!string.IsNullOrEmpty(_CouursePhoto.course_photo))
                 {
-                    string path = Application.StartupPath + "\\CoachPhoto";
-                    pictureBox1.Image = new Bitmap(path + "\\" + _CoachPhoto.coach_photo);
+                    string path = Application.StartupPath + "\\CoursePhoto";
+                    pictureBox1.Image = new Bitmap(path + "\\" + _CouursePhoto.course_photo);
                 }; } }
         public CPictureBox()
         {

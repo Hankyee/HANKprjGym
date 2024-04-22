@@ -14,11 +14,19 @@ namespace FrmMain
     
     public partial class tcoach_expert
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tcoach_expert()
+        {
+            this.tcoach_photo = new HashSet<tcoach_photo>();
+        }
+    
         public int expert_id { get; set; }
         public int coach_id { get; set; }
         public int class_id { get; set; }
     
         public virtual tclasses tclasses { get; set; }
         public virtual tIdentity tIdentity { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tcoach_photo> tcoach_photo { get; set; }
     }
 }

@@ -55,9 +55,9 @@ namespace FrmMain
             tmember_rate_class r = new tmember_rate_class();
             r.member_id = this.identity.id;
             //r.class_schedule_id = _mid;
-            r.rate = cbScore.SelectedIndex+1;
-            if(r.rate>=10)r.rate = 9.9E0m;
-            r.describe = txtRate.Text;
+            //r.rate = cbScore.SelectedIndex+1;
+            //if(r.rate>=10)r.rate = 9.9E0m;
+            //r.describe = txtRate.Text;
             db.tmember_rate_class.Add(r);
             if (afterCourseSubmit() == 0)
             {

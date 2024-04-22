@@ -20,12 +20,11 @@ namespace FrmMain
         public event Dshow showDetail;
         private tclasses _tc;
         private tclass_schedule _ts;
-        //private tclass_reserve _tr;
         private tIdentity _i;
         private tfield _f;
         private ttimes_detail _td;
         private tcoach_info_id _coachInfo;
-        //private tcoach_photo _coachPhoto;
+        private tGym _gym;
         public tclasses tc
         {
             get { return _tc; }
@@ -42,15 +41,12 @@ namespace FrmMain
         }
         public tIdentity ids { get { return _i; } set { _i = value; label6.Text = _i.name; } }
         public tclass_schedule csch { get { return _ts; } set { _ts = value; label7.Text = _ts.course_date.ToShortDateString(); } }
-        //public ttimes_detail td { get { return _td; } set { _td = value; } }
 
         public string cls 
         {
             get { return this.label5.Text; }
             set { this.label5.Text = value;}
         }
-
-        //public string time { set { this.label8.Text = value; } }
         public ttimes_detail td { get { return _td; } set { _td = value; label8.Text = _td.time_name; } }
         public tfield f { get { return _f; } set { _f = value; } }
 
@@ -62,7 +58,7 @@ namespace FrmMain
         //            pictureBox1.Image = new Bitmap(path + "\\" + _coachPhoto.coach_photo);
         //        }
         //    } }
-
+        public tGym gym { get { return _gym; } set { _gym = value; } }
         public reservebox()
         {
             InitializeComponent();

@@ -13,7 +13,7 @@ namespace FrmMain.tool
     public partial class CoachReviewBox : UserControl
     {
         private tmember_follow _coachreview;
-        public tmember_follow coachreview { get { return _coachreview; } set { _coachreview=value; lbScore.Text = _coachreview.stars.ToString(); lbDescription.Text = _coachreview.describe; } }
+        public tmember_follow coachreview { get { return _coachreview; } set { _coachreview=value; /*lbScore.Text = _coachreview.stars.ToString(); lbDescription.Text = _coachreview.describe;*/ } }
         public CoachReviewBox()
         {
             InitializeComponent();

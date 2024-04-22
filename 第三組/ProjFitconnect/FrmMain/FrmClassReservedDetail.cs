@@ -21,36 +21,18 @@ namespace FrmMain
         private ttimes_detail _time; //時間
         private tIdentity _ID; //教練名稱
         private tcoach_info_id _info; //教練資訊
-        private tcoach_photo _coachphoto; //
-        //todo:抓場地完整資料、上課時間
+        private tGym _gym;
+        //private tcourse_photo _coursephoto; //
+        //todo:抓場地完整資料
         public tclasses cls { get { return _cls; } set { _cls = value; label9.Text = _cls.class_name; label8.Text = _cls.class_introduction; } }
-        public tfield field { get { return _field; } set { _field = value; label10.Text = _field.floor+ _field.field_name; } }
+        public tGym gym { get { return _gym; } set { _gym = value; label10.Text +="  "+ _gym.name; label16.Text = _gym.address; } }
+        public tfield field { get { return _field; } set { _field = value; label10.Text = _field.floor +"  "+ _field.field_name; } }
         public tclass_schedule cs { get { return _cs; } set { _cs = value; label11.Text = _cs.course_date.ToShortDateString(); } }
-        public tIdentity ID { get { return _ID; } set { _ID = value; label12.Text = _ID.name;
-                //if (!string.IsNullOrEmpty(_ID.photo))
-                //{
-                //    string path = Application.StartupPath + "\\CoachImages";
-                //    pictureBox1.Image = new Bitmap(path + "\\" + _ID.photo);
-                //}
-            } }
-
+        public tIdentity ID { get { return _ID; } set { _ID = value; label12.Text = _ID.name;} }
         public tcoach_info_id info { get { return _info; } set { _info = value; label6.Text = _info.coach_intro; } }
-        //public tcoach_photo coachphoto { get { return _coachphoto; } set {
-        //        _coachphoto = value;
-        //        if (!string.IsNullOrEmpty(_coachphoto.coach_photo))
-        //        {
-        //            string path = Application.StartupPath + "\\CoachPhoto";
-        //            pictureBox1.Image = new Bitmap(path + "\\" + _coachphoto.coach_photo);
-        //        }
-        //    } }
-        public ttimes_detail td
-        {
-            get { return _time; }
-            set
-            {
-                _time = value; label11.Text += "  "+_time.time_name;
-            }
-        }
+        public ttimes_detail td { get { return _time; } set { _time = value; label11.Text += "    " + _time.time_name; } }
+        
+
         //todo:製作動圖，現在如從中截斷，他會返回原來位置，不會更新位置
         private int currentImageIndex = -1; // 圖片索引
         public FrmClassReservedDetail()
@@ -114,10 +96,11 @@ namespace FrmMain
         private void showCoachPhoto()
         {
             gymEntities db = new gymEntities();
-            var photo = from i in db.tIdentity
-                        from pho in db.tcoach_photo
-                        where pho.coach_id == i.id
-                        select new { coachphoto = pho};
+            var photo = //from i in db.tIdentity
+                        from csch in db.tclass_schedule
+                        from cp in db.tcourse_photo
+                        where cp.class_schedule_id == csch.class_schedule_id
+                        select new { coursephoto = cp};
             foreach( var item in photo)
             {
                 
@@ -127,7 +110,7 @@ namespace FrmMain
                 pb.Height = 90;
                 pb.Location = new System.Drawing.Point(flowLayoutPanel1.Width / 2 - pb.Width / 2);
 
-                pb.CoachPhoto = item.coachphoto;
+                pb.CoursePhoto = item.coursephoto;
                 pb.showPicture += showPicture;
                 flowLayoutPanel1.Controls.Add(pb);
 

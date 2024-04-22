@@ -26,7 +26,7 @@
           <Key>
             <PropertyRef Name="class_limited_id" />
           </Key>
-          <Property Name="class_limited_id" Type="int" Nullable="false" />
+          <Property Name="class_limited_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="describe" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="tclass_reserve">
@@ -109,7 +109,7 @@
             <PropertyRef Name="coach_photo_id" />
           </Key>
           <Property Name="coach_photo_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="coach_id" Type="int" Nullable="false" />
+          <Property Name="expert_id" Type="int" Nullable="false" />
           <Property Name="coach_photo" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="tcompany">
@@ -120,6 +120,14 @@
           <Property Name="owner_id" Type="int" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="timelimit" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tcourse_photo">
+          <Key>
+            <PropertyRef Name="course_photo_id" />
+          </Key>
+          <Property Name="course_photo_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="class_schedule_id" Type="int" />
+          <Property Name="course_photo" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="tfield">
           <Key>
@@ -205,27 +213,27 @@
           <Property Name="member_id" Type="int" Nullable="false" />
           <Property Name="coach_id" Type="int" Nullable="false" />
           <Property Name="status_id" Type="int" Nullable="false" />
-          <Property Name="stars" Type="decimal" Precision="2" Scale="1" />
-          <Property Name="describe" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="tmember_rate_class">
           <Key>
             <PropertyRef Name="rate_id" />
           </Key>
-          <Property Name="rate_id" Type="int" Nullable="false" />
-          <Property Name="reserve_id" Type="int" />
+          <Property Name="rate_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="reserve_id" Type="int" Nullable="false" />
           <Property Name="member_id" Type="int" Nullable="false" />
           <Property Name="class_id" Type="int" Nullable="false" />
           <Property Name="coach_id" Type="int" Nullable="false" />
-          <Property Name="rate" Type="decimal" Precision="2" Scale="1" Nullable="false" />
-          <Property Name="describe" Type="nvarchar(max)" />
+          <Property Name="rate_class" Type="decimal" Precision="2" Scale="1" Nullable="false" />
+          <Property Name="class_describe" Type="nvarchar(max)" />
+          <Property Name="rate_coach" Type="decimal" Precision="2" Scale="1" Nullable="false" />
+          <Property Name="coach_describe" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="tmember_status_details">
           <Key>
             <PropertyRef Name="status_id" />
           </Key>
           <Property Name="status_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="status_discribe" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="status_describe" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="towner">
           <Key>
@@ -477,15 +485,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tcoach_photo_tIdentity">
-          <End Role="tIdentity" Type="Self.tIdentity" Multiplicity="1" />
+        <Association Name="FK_tcoach_photo_tcoach_expert">
+          <End Role="tcoach_expert" Type="Self.tcoach_expert" Multiplicity="1" />
           <End Role="tcoach_photo" Type="Self.tcoach_photo" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tIdentity">
-              <PropertyRef Name="id" />
+            <Principal Role="tcoach_expert">
+              <PropertyRef Name="expert_id" />
             </Principal>
             <Dependent Role="tcoach_photo">
-              <PropertyRef Name="coach_id" />
+              <PropertyRef Name="expert_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -498,6 +506,18 @@
             </Principal>
             <Dependent Role="tcompany">
               <PropertyRef Name="owner_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tcourse_photo_tclass_schedule">
+          <End Role="tclass_schedule" Type="Self.tclass_schedule" Multiplicity="0..1" />
+          <End Role="tcourse_photo" Type="Self.tcourse_photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tclass_schedule">
+              <PropertyRef Name="class_schedule_id" />
+            </Principal>
+            <Dependent Role="tcourse_photo">
+              <PropertyRef Name="class_schedule_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -550,7 +570,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tmember_rate_class_tclass_reserve">
-          <End Role="tclass_reserve" Type="Self.tclass_reserve" Multiplicity="0..1" />
+          <End Role="tclass_reserve" Type="Self.tclass_reserve" Multiplicity="1" />
           <End Role="tmember_rate_class" Type="Self.tmember_rate_class" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tclass_reserve">
@@ -587,6 +607,7 @@
           <EntitySet Name="tcoach_info_id" EntityType="Self.tcoach_info_id" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tcoach_photo" EntityType="Self.tcoach_photo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tcompany" EntityType="Self.tcompany" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tcourse_photo" EntityType="Self.tcourse_photo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tfield" EntityType="Self.tfield" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tfield_photo" EntityType="Self.tfield_photo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tfield_reserve" EntityType="Self.tfield_reserve" Schema="dbo" store:Type="Tables" />
@@ -676,13 +697,17 @@
             <End Role="ttimes_detail" EntitySet="ttimes_detail" />
             <End Role="tclass_schedule" EntitySet="tclass_schedule" />
           </AssociationSet>
-          <AssociationSet Name="FK_tcoach_photo_tIdentity" Association="Self.FK_tcoach_photo_tIdentity">
-            <End Role="tIdentity" EntitySet="tIdentity" />
+          <AssociationSet Name="FK_tcoach_photo_tcoach_expert" Association="Self.FK_tcoach_photo_tcoach_expert">
+            <End Role="tcoach_expert" EntitySet="tcoach_expert" />
             <End Role="tcoach_photo" EntitySet="tcoach_photo" />
           </AssociationSet>
           <AssociationSet Name="FK_tcompany_towner" Association="Self.FK_tcompany_towner">
             <End Role="towner" EntitySet="towner" />
             <End Role="tcompany" EntitySet="tcompany" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tcourse_photo_tclass_schedule" Association="Self.FK_tcourse_photo_tclass_schedule">
+            <End Role="tclass_schedule" EntitySet="tclass_schedule" />
+            <End Role="tcourse_photo" EntitySet="tcourse_photo" />
           </AssociationSet>
           <AssociationSet Name="FK_tfield_photo_tfield" Association="Self.FK_tfield_photo_tfield">
             <End Role="tfield" EntitySet="tfield" />
@@ -736,7 +761,7 @@
           <Key>
             <PropertyRef Name="class_limited_id" />
           </Key>
-          <Property Name="class_limited_id" Type="Int32" Nullable="false" />
+          <Property Name="class_limited_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="describe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="tclasses" Relationship="Self.FK_classes_class_limit_details" FromRole="tclass_limit_details" ToRole="tclasses" />
         </EntityType>
@@ -773,6 +798,7 @@
           <NavigationProperty Name="tfield" Relationship="Self.FK_class_schedule_field" FromRole="tclass_schedule" ToRole="tfield" />
           <NavigationProperty Name="tIdentity" Relationship="Self.FK_class_schedule_Identity" FromRole="tclass_schedule" ToRole="tIdentity" />
           <NavigationProperty Name="ttimes_detail" Relationship="Self.FK_tclass_schedule_ttimes_detail" FromRole="tclass_schedule" ToRole="ttimes_detail" />
+          <NavigationProperty Name="tcourse_photo" Relationship="Self.FK_tcourse_photo_tclass_schedule" FromRole="tclass_schedule" ToRole="tcourse_photo" />
         </EntityType>
         <EntityType Name="tclass_sort_有氧">
           <Key>
@@ -825,6 +851,7 @@
           <Property Name="class_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tclasses" Relationship="Self.FK_coach_expert_classes" FromRole="tcoach_expert" ToRole="tclasses" />
           <NavigationProperty Name="tIdentity" Relationship="Self.FK_coach_expert_Identity" FromRole="tcoach_expert" ToRole="tIdentity" />
+          <NavigationProperty Name="tcoach_photo" Relationship="Self.FK_tcoach_photo_tcoach_expert" FromRole="tcoach_expert" ToRole="tcoach_photo" />
         </EntityType>
         <EntityType Name="tcoach_info_id">
           <Key>
@@ -840,9 +867,9 @@
             <PropertyRef Name="coach_photo_id" />
           </Key>
           <Property Name="coach_photo_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="coach_id" Type="Int32" Nullable="false" />
+          <Property Name="expert_id" Type="Int32" Nullable="false" />
           <Property Name="coach_photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tIdentity" Relationship="Self.FK_tcoach_photo_tIdentity" FromRole="tcoach_photo" ToRole="tIdentity" />
+          <NavigationProperty Name="tcoach_expert" Relationship="Self.FK_tcoach_photo_tcoach_expert" FromRole="tcoach_photo" ToRole="tcoach_expert" />
         </EntityType>
         <EntityType Name="tcompany">
           <Key>
@@ -854,6 +881,15 @@
           <Property Name="timelimit" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="towner" Relationship="Self.FK_tcompany_towner" FromRole="tcompany" ToRole="towner" />
           <NavigationProperty Name="tGym" Relationship="Self.FK_tGym_tcompany" FromRole="tcompany" ToRole="tGym" />
+        </EntityType>
+        <EntityType Name="tcourse_photo">
+          <Key>
+            <PropertyRef Name="course_photo_id" />
+          </Key>
+          <Property Name="course_photo_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="class_schedule_id" Type="Int32" />
+          <Property Name="course_photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tclass_schedule" Relationship="Self.FK_tcourse_photo_tclass_schedule" FromRole="tcourse_photo" ToRole="tclass_schedule" />
         </EntityType>
         <EntityType Name="tfield">
           <Key>
@@ -938,7 +974,6 @@
           <NavigationProperty Name="tclass_schedule" Relationship="Self.FK_class_schedule_Identity" FromRole="tIdentity" ToRole="tclass_schedule" />
           <NavigationProperty Name="tcoach_expert" Relationship="Self.FK_coach_expert_Identity" FromRole="tIdentity" ToRole="tcoach_expert" />
           <NavigationProperty Name="tcoach_info_id" Relationship="Self.FK_coach_info_id_Identity" FromRole="tIdentity" ToRole="tcoach_info_id" />
-          <NavigationProperty Name="tcoach_photo" Relationship="Self.FK_tcoach_photo_tIdentity" FromRole="tIdentity" ToRole="tcoach_photo" />
           <NavigationProperty Name="tfield_reserve" Relationship="Self.FK_field_reserve_Identity1" FromRole="tIdentity" ToRole="tfield_reserve" />
           <NavigationProperty Name="tgender_Table" Relationship="Self.FK_Identity_gender_Table1" FromRole="tIdentity" ToRole="tgender_Table" />
           <NavigationProperty Name="tidentity_role_detail" Relationship="Self.FK_Identity_identity_role_detail1" FromRole="tIdentity" ToRole="tidentity_role_detail" />
@@ -960,8 +995,6 @@
           <Property Name="member_id" Type="Int32" Nullable="false" />
           <Property Name="coach_id" Type="Int32" Nullable="false" />
           <Property Name="status_id" Type="Int32" Nullable="false" />
-          <Property Name="stars" Type="Decimal" Precision="2" Scale="1" />
-          <Property Name="describe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tIdentity" Relationship="Self.FK_member_follow_Identity1" FromRole="tmember_follow" ToRole="tIdentity" />
           <NavigationProperty Name="tmember_status_details" Relationship="Self.FK_member_follow_member_status_details" FromRole="tmember_follow" ToRole="tmember_status_details" />
         </EntityType>
@@ -969,13 +1002,15 @@
           <Key>
             <PropertyRef Name="rate_id" />
           </Key>
-          <Property Name="rate_id" Type="Int32" Nullable="false" />
-          <Property Name="reserve_id" Type="Int32" />
+          <Property Name="rate_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="reserve_id" Type="Int32" Nullable="false" />
           <Property Name="member_id" Type="Int32" Nullable="false" />
           <Property Name="class_id" Type="Int32" Nullable="false" />
           <Property Name="coach_id" Type="Int32" Nullable="false" />
-          <Property Name="rate" Type="Decimal" Precision="2" Scale="1" Nullable="false" />
-          <Property Name="describe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="rate_class" Type="Decimal" Precision="2" Scale="1" Nullable="false" />
+          <Property Name="class_describe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="rate_coach" Type="Decimal" Precision="2" Scale="1" Nullable="false" />
+          <Property Name="coach_describe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tclass_reserve" Relationship="Self.FK_tmember_rate_class_tclass_reserve" FromRole="tmember_rate_class" ToRole="tclass_reserve" />
         </EntityType>
         <EntityType Name="tmember_status_details">
@@ -983,7 +1018,7 @@
             <PropertyRef Name="status_id" />
           </Key>
           <Property Name="status_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="status_discribe" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="status_describe" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="tmember_follow" Relationship="Self.FK_member_follow_member_status_details" FromRole="tmember_status_details" ToRole="tmember_follow" />
         </EntityType>
         <EntityType Name="towner">
@@ -1061,7 +1096,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tmember_rate_class_tclass_reserve">
-          <End Role="tclass_reserve" Type="Self.tclass_reserve" Multiplicity="0..1" />
+          <End Role="tclass_reserve" Type="Self.tclass_reserve" Multiplicity="1" />
           <End Role="tmember_rate_class" Type="Self.tmember_rate_class" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tclass_reserve">
@@ -1132,6 +1167,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tcourse_photo_tclass_schedule">
+          <End Role="tclass_schedule" Type="Self.tclass_schedule" Multiplicity="0..1" />
+          <End Role="tcourse_photo" Type="Self.tcourse_photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tclass_schedule">
+              <PropertyRef Name="class_schedule_id" />
+            </Principal>
+            <Dependent Role="tcourse_photo">
+              <PropertyRef Name="class_schedule_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_classes_class_sort_有氧">
           <End Role="tclass_sort_有氧" Type="Self.tclass_sort_有氧" Multiplicity="0..1" />
           <End Role="tclasses" Type="Self.tclasses" Multiplicity="*" />
@@ -1180,6 +1227,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tcoach_photo_tcoach_expert">
+          <End Role="tcoach_expert" Type="Self.tcoach_expert" Multiplicity="1" />
+          <End Role="tcoach_photo" Type="Self.tcoach_photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tcoach_expert">
+              <PropertyRef Name="expert_id" />
+            </Principal>
+            <Dependent Role="tcoach_photo">
+              <PropertyRef Name="expert_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_coach_info_id_Identity">
           <End Role="tIdentity" Type="Self.tIdentity" Multiplicity="1" />
           <End Role="tcoach_info_id" Type="Self.tcoach_info_id" Multiplicity="*" />
@@ -1188,18 +1247,6 @@
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="tcoach_info_id">
-              <PropertyRef Name="coach_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tcoach_photo_tIdentity">
-          <End Role="tIdentity" Type="Self.tIdentity" Multiplicity="1" />
-          <End Role="tcoach_photo" Type="Self.tcoach_photo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tIdentity">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="tcoach_photo">
               <PropertyRef Name="coach_id" />
             </Dependent>
           </ReferentialConstraint>
@@ -1350,6 +1397,7 @@
           <EntitySet Name="tcoach_info_id" EntityType="Self.tcoach_info_id" />
           <EntitySet Name="tcoach_photo" EntityType="Self.tcoach_photo" />
           <EntitySet Name="tcompany" EntityType="Self.tcompany" />
+          <EntitySet Name="tcourse_photo" EntityType="Self.tcourse_photo" />
           <EntitySet Name="tfield" EntityType="Self.tfield" />
           <EntitySet Name="tfield_photo" EntityType="Self.tfield_photo" />
           <EntitySet Name="tfield_reserve" EntityType="Self.tfield_reserve" />
@@ -1403,6 +1451,10 @@
             <End Role="ttimes_detail" EntitySet="ttimes_detail" />
             <End Role="tclass_schedule" EntitySet="tclass_schedule" />
           </AssociationSet>
+          <AssociationSet Name="FK_tcourse_photo_tclass_schedule" Association="Self.FK_tcourse_photo_tclass_schedule">
+            <End Role="tclass_schedule" EntitySet="tclass_schedule" />
+            <End Role="tcourse_photo" EntitySet="tcourse_photo" />
+          </AssociationSet>
           <AssociationSet Name="FK_classes_class_sort_有氧" Association="Self.FK_classes_class_sort_有氧">
             <End Role="tclass_sort_有氧" EntitySet="tclass_sort_有氧" />
             <End Role="tclasses" EntitySet="tclasses" />
@@ -1419,13 +1471,13 @@
             <End Role="tIdentity" EntitySet="tIdentity" />
             <End Role="tcoach_expert" EntitySet="tcoach_expert" />
           </AssociationSet>
+          <AssociationSet Name="FK_tcoach_photo_tcoach_expert" Association="Self.FK_tcoach_photo_tcoach_expert">
+            <End Role="tcoach_expert" EntitySet="tcoach_expert" />
+            <End Role="tcoach_photo" EntitySet="tcoach_photo" />
+          </AssociationSet>
           <AssociationSet Name="FK_coach_info_id_Identity" Association="Self.FK_coach_info_id_Identity">
             <End Role="tIdentity" EntitySet="tIdentity" />
             <End Role="tcoach_info_id" EntitySet="tcoach_info_id" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tcoach_photo_tIdentity" Association="Self.FK_tcoach_photo_tIdentity">
-            <End Role="tIdentity" EntitySet="tIdentity" />
-            <End Role="tcoach_photo" EntitySet="tcoach_photo" />
           </AssociationSet>
           <AssociationSet Name="FK_tcompany_towner" Association="Self.FK_tcompany_towner">
             <End Role="towner" EntitySet="towner" />
@@ -1592,7 +1644,7 @@
             <EntityTypeMapping TypeName="gymModel.tcoach_photo">
               <MappingFragment StoreEntitySet="tcoach_photo">
                 <ScalarProperty Name="coach_photo_id" ColumnName="coach_photo_id" />
-                <ScalarProperty Name="coach_id" ColumnName="coach_id" />
+                <ScalarProperty Name="expert_id" ColumnName="expert_id" />
                 <ScalarProperty Name="coach_photo" ColumnName="coach_photo" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1604,6 +1656,15 @@
                 <ScalarProperty Name="owner_id" ColumnName="owner_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="timelimit" ColumnName="timelimit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tcourse_photo">
+            <EntityTypeMapping TypeName="gymModel.tcourse_photo">
+              <MappingFragment StoreEntitySet="tcourse_photo">
+                <ScalarProperty Name="course_photo_id" ColumnName="course_photo_id" />
+                <ScalarProperty Name="class_schedule_id" ColumnName="class_schedule_id" />
+                <ScalarProperty Name="course_photo" ColumnName="course_photo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1697,8 +1758,6 @@
                 <ScalarProperty Name="member_id" ColumnName="member_id" />
                 <ScalarProperty Name="coach_id" ColumnName="coach_id" />
                 <ScalarProperty Name="status_id" ColumnName="status_id" />
-                <ScalarProperty Name="stars" ColumnName="stars" />
-                <ScalarProperty Name="describe" ColumnName="describe" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1710,8 +1769,10 @@
                 <ScalarProperty Name="member_id" ColumnName="member_id" />
                 <ScalarProperty Name="class_id" ColumnName="class_id" />
                 <ScalarProperty Name="coach_id" ColumnName="coach_id" />
-                <ScalarProperty Name="rate" ColumnName="rate" />
-                <ScalarProperty Name="describe" ColumnName="describe" />
+                <ScalarProperty Name="rate_class" ColumnName="rate_class" />
+                <ScalarProperty Name="class_describe" ColumnName="class_describe" />
+                <ScalarProperty Name="rate_coach" ColumnName="rate_coach" />
+                <ScalarProperty Name="coach_describe" ColumnName="coach_describe" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1719,7 +1780,7 @@
             <EntityTypeMapping TypeName="gymModel.tmember_status_details">
               <MappingFragment StoreEntitySet="tmember_status_details">
                 <ScalarProperty Name="status_id" ColumnName="status_id" />
-                <ScalarProperty Name="status_discribe" ColumnName="status_discribe" />
+                <ScalarProperty Name="status_describe" ColumnName="status_describe" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

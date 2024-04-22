@@ -38,6 +38,7 @@ namespace FrmMain
         public virtual DbSet<tcoach_info_id> tcoach_info_id { get; set; }
         public virtual DbSet<tcoach_photo> tcoach_photo { get; set; }
         public virtual DbSet<tcompany> tcompany { get; set; }
+        public virtual DbSet<tcourse_photo> tcourse_photo { get; set; }
         public virtual DbSet<tfield> tfield { get; set; }
         public virtual DbSet<tfield_photo> tfield_photo { get; set; }
         public virtual DbSet<tfield_reserve> tfield_reserve { get; set; }

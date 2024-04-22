@@ -15,12 +15,14 @@ namespace FrmMain
     public partial class tmember_rate_class
     {
         public int rate_id { get; set; }
-        public Nullable<int> reserve_id { get; set; }
+        public int reserve_id { get; set; }
         public int member_id { get; set; }
         public int class_id { get; set; }
         public int coach_id { get; set; }
-        public decimal rate { get; set; }
-        public string describe { get; set; }
+        public decimal rate_class { get; set; }
+        public string class_describe { get; set; }
+        public decimal rate_coach { get; set; }
+        public string coach_describe { get; set; }
     
         public virtual tclass_reserve tclass_reserve { get; set; }
     }

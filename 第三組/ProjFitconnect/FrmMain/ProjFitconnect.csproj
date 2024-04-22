@@ -170,6 +170,9 @@
     <Compile Include="tcompany.cs">
       <DependentUpon>dbgym.tt</DependentUpon>
     </Compile>
+    <Compile Include="tcourse_photo.cs">
+      <DependentUpon>dbgym.tt</DependentUpon>
+    </Compile>
     <Compile Include="tfield.cs">
       <DependentUpon>dbgym.tt</DependentUpon>
     </Compile>

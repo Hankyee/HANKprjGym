@@ -36,6 +36,8 @@ namespace FrmMain
                                 from t in db.ttimes_detail
                                 from fd in db.tfield
                                 from cif in db.tcoach_info_id
+                                from tg in db.tGym
+                                where fd.Gym_id == tg.Gym_id
                                 where i.id == cif.coach_id
                                 where cs.field_id == fd.field_id
                                 where cr.member_id == findID
@@ -44,7 +46,7 @@ namespace FrmMain
                                 where cs.coach_id == i.id
                                 where cs.course_time_id == t.time_id
                                 where cr.reserve_status == true
-                                select new { classes = c ,identity = i, classSchedule = cs, time = t ,field = fd,coachinfo = cif};
+                                select new { classes = c ,identity = i, classSchedule = cs, time = t ,field = fd,gym =tg,coachinfo = cif};
 
             foreach (var item in classreserved)
             {
@@ -60,6 +62,7 @@ namespace FrmMain
                 rb.td = item.time;
                 rb.f = item.field;
                 rb.coachInfo = item.coachinfo;
+                rb.gym = item.gym;
                 rb.showReserve += showReserve;
                 rb.showDetail += showDetail;
                 flowLayoutPanel1.Controls.Add(rb);
@@ -80,18 +83,16 @@ namespace FrmMain
             if(identity == null) return;
             tcoach_info_id c_info = db.tcoach_info_id.FirstOrDefault(e => e.coach_id == x);
             if(c_info==null) return;
-            tcoach_photo c_photo = db.tcoach_photo.FirstOrDefault(g => g.coach_id == x);
-            //var c_photo = from cp in db.tcoach_photo
-            //              where cp.coach_id == 13
-            //              select cp;
+            tcourse_photo c_photo = db.tcourse_photo.FirstOrDefault(h => h.class_schedule_id == p.csch.class_schedule_id);
             if (c_photo == null) return;
             ttimes_detail time = db.ttimes_detail.FirstOrDefault(t => t.time_id == p.td.time_id);
             if(time == null) return;
-
+            tGym gym = db.tGym.FirstOrDefault(g => g.Gym_id == p.gym.Gym_id);
+            if(gym == null) return;
             //tclass_reserve cr = db.tclass_reserve.FirstOrDefault(r=>r.member_id==this.identity.id&&r.tclass_schedule.tclasses.class_name==p.cls);
 
             FrmClassReservedDetail f = new FrmClassReservedDetail
-            { cls = cl, field = tfield, cs = cs ,ID=identity,info =c_info, td=time/*coachphoto = c_photo*/ };
+            { cls = cl, field = tfield, cs = cs ,ID=identity,info =c_info, td = time, gym = gym };
             
             f.Show();
         }

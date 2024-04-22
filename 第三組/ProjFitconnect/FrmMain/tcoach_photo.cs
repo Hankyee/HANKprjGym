@@ -15,9 +15,9 @@ namespace FrmMain
     public partial class tcoach_photo
     {
         public int coach_photo_id { get; set; }
-        public int coach_id { get; set; }
+        public int expert_id { get; set; }
         public string coach_photo { get; set; }
     
-        public virtual tIdentity tIdentity { get; set; }
+        public virtual tcoach_expert tcoach_expert { get; set; }
     }
 }

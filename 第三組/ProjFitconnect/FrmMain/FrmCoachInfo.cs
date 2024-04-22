@@ -60,7 +60,7 @@ namespace Revised_V1._1
                 cvb.Width=flowLayoutPanel1.Width*3/4;
                 cvb.coachreview = f;
                 flowLayoutPanel1 .Controls.Add(cvb);
-                stars += Convert.ToDecimal(cvb.coachreview.stars);
+                //stars += Convert.ToDecimal(cvb.coachreview.stars);
                 count++;
             }
             if (count > 0)

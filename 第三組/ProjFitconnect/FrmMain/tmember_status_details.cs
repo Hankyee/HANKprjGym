@@ -21,7 +21,7 @@ namespace FrmMain
         }
     
         public int status_id { get; set; }
-        public string status_discribe { get; set; }
+        public string status_describe { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tmember_follow> tmember_follow { get; set; }

@@ -18,8 +18,6 @@ namespace FrmMain
         public int member_id { get; set; }
         public int coach_id { get; set; }
         public int status_id { get; set; }
-        public Nullable<decimal> stars { get; set; }
-        public string describe { get; set; }
     
         public virtual tIdentity tIdentity { get; set; }
         public virtual tmember_status_details tmember_status_details { get; set; }

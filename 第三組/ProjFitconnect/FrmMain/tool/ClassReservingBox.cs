@@ -20,7 +20,7 @@ namespace FrmMain.tool
         private tclass_schedule _ts;
         private tIdentity _i;
         private ttimes_detail _td; 
-        public tmember_rate_class mrc {get { return _mrc;}set { _mrc = value; labelScore.Text = _mrc.rate.ToString(); } }
+        public tmember_rate_class mrc {get { return _mrc;}set { _mrc = value; /*labelScore.Text = _mrc.rate.ToString();*/ } }
         public tclass_sort_訓練 train { get; set; }
         public tclasses tc
         {

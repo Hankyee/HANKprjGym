@@ -125,8 +125,8 @@ namespace Gym
             t.member_id = this.identity.id;
             t.status_id = 3;
             t.coach_id = _id;
-            t.stars = cbStar.SelectedIndex+1;
-            t.describe = this.txtRate.Text;
+            //t.stars = cbStar.SelectedIndex+1;
+            //t.describe = this.txtRate.Text;
             db.tmember_follow.Add(t);
             if (afterCourseSubmit() == 0)
             {
