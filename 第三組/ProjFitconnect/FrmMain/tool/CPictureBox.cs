@@ -29,7 +29,6 @@ namespace FrmMain.tool
         {
             InitializeComponent();
         }
-
         public void pictureBox1_Click(object sender, EventArgs e)
         {
             if (this.showPicture != null) this.showPicture(this);

@@ -15,7 +15,6 @@ namespace FrmMain
     public delegate void Dshow(reservebox p);
     public partial class reservebox : UserControl
     {
-        
         public event Dshow showReserve;
         public event Dshow showDetail;
         private tclasses _tc;
@@ -41,34 +40,19 @@ namespace FrmMain
         }
         public tIdentity ids { get { return _i; } set { _i = value; label6.Text = _i.name; } }
         public tclass_schedule csch { get { return _ts; } set { _ts = value; label7.Text = _ts.course_date.ToShortDateString(); } }
-
-        public string cls 
-        {
-            get { return this.label5.Text; }
-            set { this.label5.Text = value;}
-        }
+        public string cls {get { return this.label5.Text; }set { this.label5.Text = value;}}
         public ttimes_detail td { get { return _td; } set { _td = value; label8.Text = _td.time_name; } }
         public tfield f { get { return _f; } set { _f = value; } }
-
         public tcoach_info_id coachInfo { get { return _coachInfo; } set { _coachInfo = value; } }
-        //public tcoach_photo coachPhoto { get { return _coachPhoto; }set { _coachPhoto = value;
-        //        if (!string.IsNullOrEmpty(_coachPhoto.coach_photo))
-        //        {
-        //            string path = Application.StartupPath + "\\CoachPhoto";
-        //            pictureBox1.Image = new Bitmap(path + "\\" + _coachPhoto.coach_photo);
-        //        }
-        //    } }
         public tGym gym { get { return _gym; } set { _gym = value; } }
         public reservebox()
         {
             InitializeComponent();
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
             if (this.showReserve != null) this.showReserve(this);
         }
-
         private void button2_Click(object sender, EventArgs e)
         {
             if(this.showDetail != null) this.showDetail(this);

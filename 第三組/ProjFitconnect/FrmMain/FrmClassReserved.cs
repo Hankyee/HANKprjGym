@@ -13,18 +13,14 @@ namespace FrmMain
     public partial class FrmClassReserved : Form
     {
         public tIdentity identity { get; set; }
-        
         public FrmClassReserved()
         {
             InitializeComponent();
         }
-
         private void FrmClassReserved_Load(object sender, EventArgs e)
         {
             ShowClassReserved();
-
         }
-
         private void ShowClassReserved()
         {
             gymEntities db = new gymEntities();
@@ -68,7 +64,6 @@ namespace FrmMain
                 flowLayoutPanel1.Controls.Add(rb);
             }
         }
-
         private void showDetail(reservebox p)
         {
             int x = p.ids.id;
@@ -89,14 +84,11 @@ namespace FrmMain
             if(time == null) return;
             tGym gym = db.tGym.FirstOrDefault(g => g.Gym_id == p.gym.Gym_id);
             if(gym == null) return;
-            //tclass_reserve cr = db.tclass_reserve.FirstOrDefault(r=>r.member_id==this.identity.id&&r.tclass_schedule.tclasses.class_name==p.cls);
-
+           
             FrmClassReservedDetail f = new FrmClassReservedDetail
             { cls = cl, field = tfield, cs = cs ,ID=identity,info =c_info, td = time, gym = gym };
-            
             f.Show();
         }
-
         private void showReserve(reservebox p)
         {
             using (gymEntities db = new gymEntities())
