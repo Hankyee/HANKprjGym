@@ -1,0 +1,535 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{37118F9F-1FD6-4852-94B1-3E7BD99A278D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>FrmMain</RootNamespace>
+    <AssemblyName>FrmMain</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="dbgym.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbgym.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dbgym.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbgym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dbgym.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbgym.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAdmin_ClassUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAdmin_ClassUpdate.designer.cs">
+      <DependentUpon>FrmAdmin_ClassUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAdmin_Payment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAdmin_Payment.Designer.cs">
+      <DependentUpon>FrmAdmin_Payment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmClassRate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmClassRate.designer.cs">
+      <DependentUpon>FrmClassRate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmClassReservedDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmClassReservedDetail.Designer.cs">
+      <DependentUpon>FrmClassReservedDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCoach_Payment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCoach_Payment.designer.cs">
+      <DependentUpon>FrmCoach_Payment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmEditMemberRegister.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmEditMemberRegister.Designer.cs">
+      <DependentUpon>FrmEditMemberRegister.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmFindCoach.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmFindCoach.designer.cs">
+      <DependentUpon>FrmFindCoach.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmFollow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmFollow.designer.cs">
+      <DependentUpon>FrmFollow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmMember_CourseReservationV2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMember_CourseReservationV2.designer.cs">
+      <DependentUpon>FrmMember_CourseReservationV2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmReservingClasses.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmReservingClasses.Designer.cs">
+      <DependentUpon>FrmReservingClasses.cs</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>dbgym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tcity.cs">
+      <DependentUpon>dbgym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tclasses.cs">
+      <DependentUpon>dbgym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tclass_limit_details.cs">
+      <DependentUpon>dbgym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tclass_reserve.cs">
+      <DependentUpon>dbgym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tclass_schedule.cs">
+      <DependentUpon>dbgym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tclass_sort_有氧.cs">
+      <DependentUpon>dbgym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tclass_sort_訓練.cs">
+      <DependentUpon>dbgym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tclass_status_detail.cs">
+      <DependentUpon>dbgym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tcoach_expert.cs">
+      <DependentUpon>dbgym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tcoach_info_id.cs">
+      <DependentUpon>dbgym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tcoach_photo.cs">
+      <DependentUpon>dbgym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tcompany.cs">
+      <DependentUpon>dbgym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tfield.cs">
+      <DependentUpon>dbgym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tfield_photo.cs">
+      <DependentUpon>dbgym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tfield_reserve.cs">
+      <DependentUpon>dbgym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tgender_Table.cs">
+      <DependentUpon>dbgym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tGym.cs">
+      <DependentUpon>dbgym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tIdentity.cs">
+      <DependentUpon>dbgym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tidentity_role_detail.cs">
+      <DependentUpon>dbgym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tmember_follow.cs">
+      <DependentUpon>dbgym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tmember_rate_class.cs">
+      <DependentUpon>dbgym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tmember_status_details.cs">
+      <DependentUpon>dbgym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tool\CoachReviewBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="tool\CoachReviewBox.Designer.cs">
+      <DependentUpon>CoachReviewBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="tool\ClassReservingBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="tool\ClassReservingBox.Designer.cs">
+      <DependentUpon>ClassReservingBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAdmin_Checkmember.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAdmin_Checkmember.Designer.cs">
+      <DependentUpon>FrmAdmin_Checkmember.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmClassReserved.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmClassReserved.designer.cs">
+      <DependentUpon>FrmClassReserved.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCoachInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCoachInfo.designer.cs">
+      <DependentUpon>FrmCoachInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCoachVerify.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCoachVerify.designer.cs">
+      <DependentUpon>FrmCoachVerify.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmEditCoachRegister.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmEditCoachRegister.designer.cs">
+      <DependentUpon>FrmEditCoachRegister.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmNewExpert.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmNewExpert.designer.cs">
+      <DependentUpon>FrmNewExpert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmOpenedClassCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmOpenedClassCheck.designer.cs">
+      <DependentUpon>FrmOpenedClassCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="tool\CPictureBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="tool\CPictureBox.Designer.cs">
+      <DependentUpon>CPictureBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="tool\reservebox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="tool\reservebox.designer.cs">
+      <DependentUpon>reservebox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="tool\ReservedMemberCheck.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="tool\ReservedMemberCheck.designer.cs">
+      <DependentUpon>ReservedMemberCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="tool\CRoundPictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Frmfreetrial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frmfreetrial.designer.cs">
+      <DependentUpon>Frmfreetrial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="tool\CourseBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="tool\CourseBox.designer.cs">
+      <DependentUpon>CourseBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="tool\FieldBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="tool\FieldBox.Designer.cs">
+      <DependentUpon>FieldBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCoach_AddNewCourse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCoach_AddNewCourse.designer.cs">
+      <DependentUpon>FrmCoach_AddNewCourse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmMember_CourseReservation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMember_CourseReservation.designer.cs">
+      <DependentUpon>FrmMember_CourseReservation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="tool\CoachBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="tool\CoachBox.designer.cs">
+      <DependentUpon>CoachBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmFAQ.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmFAQ.designer.cs">
+      <DependentUpon>FrmFAQ.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmField.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmField.Designer.cs">
+      <DependentUpon>FrmField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmHomePage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmHomePage.designer.cs">
+      <DependentUpon>FrmHomePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\FrmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\FrmLogin.designer.cs">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\FrmNewAdminRegister.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\FrmNewAdminRegister.designer.cs">
+      <DependentUpon>FrmNewAdminRegister.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\FrmNewCoachRegister.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\FrmNewCoachRegister.designer.cs">
+      <DependentUpon>FrmNewCoachRegister.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\FrmNewMemberRegister.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\FrmNewMemberRegister.designer.cs">
+      <DependentUpon>FrmNewMemberRegister.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm_首頁.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_首頁.designer.cs">
+      <DependentUpon>Frm_首頁.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="towner.cs">
+      <DependentUpon>dbgym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tregion_table.cs">
+      <DependentUpon>dbgym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ttimes_detail.cs">
+      <DependentUpon>dbgym.tt</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="FrmAdmin_ClassUpdate.resx">
+      <DependentUpon>FrmAdmin_ClassUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAdmin_Payment.resx">
+      <DependentUpon>FrmAdmin_Payment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmClassRate.resx">
+      <DependentUpon>FrmClassRate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmClassReservedDetail.resx">
+      <DependentUpon>FrmClassReservedDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCoach_Payment.resx">
+      <DependentUpon>FrmCoach_Payment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmEditMemberRegister.resx">
+      <DependentUpon>FrmEditMemberRegister.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmFindCoach.resx">
+      <DependentUpon>FrmFindCoach.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmFollow.resx">
+      <DependentUpon>FrmFollow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMember_CourseReservationV2.resx">
+      <DependentUpon>FrmMember_CourseReservationV2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmReservingClasses.resx">
+      <DependentUpon>FrmReservingClasses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="tool\CoachReviewBox.resx">
+      <DependentUpon>CoachReviewBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="tool\ClassReservingBox.resx">
+      <DependentUpon>ClassReservingBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAdmin_Checkmember.resx">
+      <DependentUpon>FrmAdmin_Checkmember.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmClassReserved.resx">
+      <DependentUpon>FrmClassReserved.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCoachInfo.resx">
+      <DependentUpon>FrmCoachInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCoachVerify.resx">
+      <DependentUpon>FrmCoachVerify.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmEditCoachRegister.resx">
+      <DependentUpon>FrmEditCoachRegister.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frmfreetrial.resx">
+      <DependentUpon>Frmfreetrial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmNewExpert.resx">
+      <DependentUpon>FrmNewExpert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmOpenedClassCheck.resx">
+      <DependentUpon>FrmOpenedClassCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="tool\CPictureBox.resx">
+      <DependentUpon>CPictureBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="tool\reservebox.resx">
+      <DependentUpon>reservebox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="tool\ReservedMemberCheck.resx">
+      <DependentUpon>ReservedMemberCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="tool\CourseBox.resx">
+      <DependentUpon>CourseBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCoach_AddNewCourse.resx">
+      <DependentUpon>FrmCoach_AddNewCourse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMember_CourseReservation.resx">
+      <DependentUpon>FrmMember_CourseReservation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="tool\CoachBox.resx">
+      <DependentUpon>CoachBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="tool\FieldBox.resx">
+      <DependentUpon>FieldBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmFAQ.resx">
+      <DependentUpon>FrmFAQ.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmField.resx">
+      <DependentUpon>FrmField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmHomePage.resx">
+      <DependentUpon>FrmHomePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\FrmLogin.resx">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\FrmNewAdminRegister.resx">
+      <DependentUpon>FrmNewAdminRegister.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\FrmNewCoachRegister.resx">
+      <DependentUpon>FrmNewCoachRegister.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\FrmNewMemberRegister.resx">
+      <DependentUpon>FrmNewMemberRegister.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_首頁.resx">
+      <DependentUpon>Frm_首頁.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EntityDeploy Include="dbgym.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>dbgym.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="dbgym.edmx.diagram">
+      <DependentUpon>dbgym.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gymm.jpg" />
+    <None Include="Resources\gym4.jpg" />
+    <None Include="Resources\gym3.jpg" />
+    <None Include="Resources\gym2.jpg" />
+    <None Include="Resources\gym1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="dbgym.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>dbgym.edmx</DependentUpon>
+      <LastGenOutput>dbgym.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="dbgym.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>dbgym.edmx</DependentUpon>
+      <LastGenOutput>dbgym.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
